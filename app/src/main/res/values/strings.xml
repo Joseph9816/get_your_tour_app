@@ -7,4 +7,10 @@
     <string name="title_favorites">Favoritos</string>
     <string name="title_reservations">Reservaciones</string>
     <string name="title_profile">Perfil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Ida">  Ida</string>
+    <string name="destino">Grecia, París...</string>
+    <string name="fecha_regreso">  Vuelta</string>
+    <string name="buscar">Buscar</string>
 </resources>
