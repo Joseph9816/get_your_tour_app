@@ -10,7 +10,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Ida">  Ida</string>
-    <string name="destino">Grecia, París...</string>
+    <string name="destiny">Grecia, París...</string>
     <string name="fecha_regreso">  Vuelta</string>
-    <string name="buscar">Buscar</string>
+    <string name="search">Buscar</string>
+    <string name="explore_tittle">Selecciona el lugar y fechas que deseas buscar</string>
 </resources>

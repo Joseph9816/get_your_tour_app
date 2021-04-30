@@ -8,32 +8,43 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.get_your_tour_app.R
+import com.example.get_your_tour_app.RecycleAdapter
 import com.example.get_your_tour_app.databinding.FragmentExploreBinding
+
 
 class  ExploreFragment : Fragment() {
 
     private lateinit var exploreViewModel: ExploreViewModel
     private var _binding: FragmentExploreBinding? = null
     private val binding get() = _binding!!
+    private var layoutManager: RecyclerView.LayoutManager? = null
+    private var adapter: RecyclerView.Adapter<RecycleAdapter.ViewHolder>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        exploreViewModel =
+        /*exploreViewModel =
             ViewModelProvider(this).get(ExploreViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_explore, container, false)
         val textView: TextView = root.findViewById(R.id.text_explore)
         exploreViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
-        })/*
-
-        val EdText: EditText = root.findViewById(R.id.startDate)
-        EdText.setOnClickListener { showDatePickerDialog() }*/
+        })*/
+        val view: View = inflater.inflate(R.layout.fragment_explore, container, false)
         _binding = FragmentExploreBinding.inflate(inflater, container, false)
-        binding.textExplore.text = "Selecciona el lugar y fechas que deseas buscar"
+
+        var recycleView: RecyclerView = binding.recycleView;
+
+        adapter = RecycleAdapter()
+        layoutManager = LinearLayoutManager(view.context)
+        recycleView.layoutManager = layoutManager
+        recycleView.adapter = adapter
+
         return binding.root
     }
 
