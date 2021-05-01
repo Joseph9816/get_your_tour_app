@@ -24,16 +24,6 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_profile, container, false)
-        val button: Button = root.findViewById(R.id.button3)
-        profileViewModel.text.observe(viewLifecycleOwner, Observer {
-            button.setOnClickListener{
-                it.findNavController().navigate(R.id.action_navigation_profile_to_navigation_register)
-            }
-        })
-
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
