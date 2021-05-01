@@ -6,14 +6,22 @@
     app:startDestination="@+id/navigation_explore">
 
     <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.get_your_tour_app.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.get_your_tour_app.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
         android:id="@+id/navigation_explore"
         android:name="com.example.get_your_tour_app.ui.explore.ExploreFragment"
         android:label="@string/title_explore"
-        tools:layout="@layout/fragment_explore" >
-        <action
-            android:id="@+id/action_navigation_explore_to_navigation_favorites"
-            app:destination="@id/navigation_favorites" />
-    </fragment>
+        tools:layout="@layout/fragment_explore" />
 
     <fragment
         android:id="@+id/navigation_favorites"
@@ -31,5 +39,13 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.get_your_tour_app.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_register"
+            app:destination="@id/navigation_register" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_register"
+        android:label="@string/title_register"
+        tools:layout="@layout/fragment_register" />
 </navigation>
