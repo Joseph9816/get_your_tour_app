@@ -15,18 +15,25 @@ import com.example.get_your_tour_app.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var profileViewModel: ProfileViewModel
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.button3.setOnClickListener {
+            it.findNavController().navigate(R.id.action_navigation_profile_to_navigation_register)
+        }
+        binding.button3
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

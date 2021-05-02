@@ -1,20 +1,18 @@
 package com.example.get_your_tour_app
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.get_your_tour_app.R.id.recycleView
-import kotlin.math.log
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,39 +38,59 @@ class MainActivity : AppCompatActivity() {
 
 
     fun showDatePickerDialog1(view: View) {
-        val datePicker = DatePickerFragment{ day, month, year -> onDateSelected(
-            day, month, year, findViewById(
-                R.id.startDate
-            )
-        ) }
+        val datePicker = DatePickerFragment{ day, month, year -> onDateSelectedStart(day, month, year, findViewById(R.id.startDate)) }
         datePicker.show(supportFragmentManager, "datePicker")
     }
 
     fun showDatePickerDialog2(view: View) {
         val start: EditText = findViewById(R.id.startDate)
         val text = start.text
-        /*if(!text.equals("")){
-            val datePicker = DatePickerFragment{ day, month, year -> onDateSelected(
-                day, month, year, findViewById(
-                    R.id.endDate
-                )
-            ) }
+        System.out.println("Text of startDate: $text")
+        if(!text.isBlank()){
+            val datePicker = DatePickerFragment{ day, month, year -> onDateSelectedEnd(day, month, year, findViewById(R.id.endDate))}
             datePicker.show(supportFragmentManager, "datePicker")
-        } else {*/
-
-        val toast = Toast.makeText(this, "Selecciona la fecha de ida primero", Toast.LENGTH_SHORT)
-        //toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
-        toast.show()
-        //}
+        }
+        else{
+            simpleAlert("Aceptar", "Seleccione primero la fecha de ida", "Error de fechas")
+        }
     }
 
-    private fun onDateSelected(day: Int, month: Int, year: Int, date: EditText) {
+    private fun onDateSelectedStart(day: Int, month: Int, year: Int, date: EditText) {
         date.setText(" $day/$month/$year")
     }
 
-    private fun prueba2() {
-        val toast = Toast.makeText(this, "Selecciona la fecha de ida primero", Toast.LENGTH_SHORT)
-        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
-        toast.show()
+    private fun onDateSelectedEnd(day: Int, month: Int, year: Int, date: EditText) {
+        val startDate: EditText = findViewById(R.id.startDate)
+        val text = startDate.text
+        if(veriifyEnd(text.toString(), "$day/$month/$year")) {
+            date.setText("$day/$month/$year")
+        } else {
+            simpleAlert("Aceptar", "La fecha de vuelta no puede ser antes que la fecha de ida", "Error de fechas")
+        }
+    }
+
+    private fun simpleAlert(text: String, message: String, title: String) {
+        var myBuild: AlertDialog.Builder = AlertDialog.Builder(this)
+        myBuild.setMessage(message)
+        myBuild.setTitle(title)
+        myBuild.setPositiveButton(text, null)
+
+        var dialog: AlertDialog = myBuild.create()
+        dialog.show()
+    }
+
+    private fun veriifyEnd(startDate: String, endDate: String): Boolean {
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        var timeInMillisecondsStart = System.currentTimeMillis() - 1000
+        var timeInMillisecondsEnd = System.currentTimeMillis() - 1000
+        try {
+            var mDate: Date = sdf.parse(startDate)
+            timeInMillisecondsStart = mDate.time
+            mDate = sdf.parse(endDate)
+            timeInMillisecondsEnd = mDate.time
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return timeInMillisecondsStart <= timeInMillisecondsEnd
     }
 }
