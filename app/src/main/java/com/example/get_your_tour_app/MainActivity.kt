@@ -1,8 +1,10 @@
 package com.example.get_your_tour_app
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -16,7 +18,6 @@ import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,25 +26,53 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            /*R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,*/ R.id.navigation_explore, R.id.navigation_favorites, R.id.navigation_reservations))
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                /*R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,*/
+                R.id.navigation_explore,
+                R.id.navigation_favorites,
+                R.id.navigation_reservations
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
 
     fun showDatePickerDialog1(view: View) {
-
-        val datePicker = DatePickerFragment{ day, month, year -> onDateSelected(day, month, year, findViewById(R.id.startDate)) }
+        val datePicker = DatePickerFragment{ day, month, year -> onDateSelected(
+            day, month, year, findViewById(
+                R.id.startDate
+            )
+        ) }
         datePicker.show(supportFragmentManager, "datePicker")
     }
 
     fun showDatePickerDialog2(view: View) {
-        val datePicker = DatePickerFragment{ day, month, year -> onDateSelected(day, month, year , findViewById(R.id.endDate)) }
-        datePicker.show(supportFragmentManager, "datePicker")
+        val start: EditText = findViewById(R.id.startDate)
+        val text = start.text
+        /*if(!text.equals("")){
+            val datePicker = DatePickerFragment{ day, month, year -> onDateSelected(
+                day, month, year, findViewById(
+                    R.id.endDate
+                )
+            ) }
+            datePicker.show(supportFragmentManager, "datePicker")
+        } else {*/
+
+        val toast = Toast.makeText(this, "Selecciona la fecha de ida primero", Toast.LENGTH_SHORT)
+        //toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
+        toast.show()
+        //}
     }
 
-    private fun onDateSelected(day:Int, month:Int, year:Int, date: EditText) {
+    private fun onDateSelected(day: Int, month: Int, year: Int, date: EditText) {
         date.setText(" $day/$month/$year")
+    }
+
+    private fun prueba2() {
+        val toast = Toast.makeText(this, "Selecciona la fecha de ida primero", Toast.LENGTH_SHORT)
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
+        toast.show()
     }
 }

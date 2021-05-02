@@ -26,4 +26,7 @@
     <string name="fecha_regreso">  Vuelta</string>
     <string name="search">Buscar</string>
     <string name="explore_tittle">Selecciona el lugar y fechas que deseas buscar</string>
+    <string name="from_card">From</string>
+    <string name="opinions">0 Opiniones</string>
+    <string name="todo">TODO</string>
 </resources>

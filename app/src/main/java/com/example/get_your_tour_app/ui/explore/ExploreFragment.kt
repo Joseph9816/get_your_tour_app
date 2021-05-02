@@ -17,7 +17,6 @@ import com.example.get_your_tour_app.databinding.FragmentExploreBinding
 
 class  ExploreFragment : Fragment() {
 
-    private lateinit var exploreViewModel: ExploreViewModel
     private var _binding: FragmentExploreBinding? = null
     private val binding get() = _binding!!
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -28,13 +27,7 @@ class  ExploreFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        /*exploreViewModel =
-            ViewModelProvider(this).get(ExploreViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_explore, container, false)
-        val textView: TextView = root.findViewById(R.id.text_explore)
-        exploreViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
+
         val view: View = inflater.inflate(R.layout.fragment_explore, container, false)
         _binding = FragmentExploreBinding.inflate(inflater, container, false)
 
@@ -56,13 +49,4 @@ class  ExploreFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-/*
-    private fun showDatePickerDialog() {
-        val datePicker = DatePickerFragment { day, month, year -> onDateSelected(day, month, year) }
-        datePicker.show(supportFragmentManger, "datePicker")
-    }
-
-    fun onDateSelected(day:Int, month:Int, year:Int) {
-        // startDate.setText("$day/$month/$year")
-    }*/
 }
