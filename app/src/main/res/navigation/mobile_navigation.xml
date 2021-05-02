@@ -47,5 +47,6 @@
     <fragment
         android:id="@+id/navigation_register"
         android:label="@string/title_register"
+        android:name="com.example.get_your_tour_app.ui.register.RegisterFragment"
         tools:layout="@layout/fragment_register" />
 </navigation>
