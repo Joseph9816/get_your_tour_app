@@ -44,7 +44,7 @@
 
                         <EditText
                             android:id="@+id/startDate"
-                            android:layout_width="192dp"
+                            android:layout_width="172dp"
                             android:layout_height="52dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginLeft="10dp"
@@ -63,7 +63,7 @@
 
                         <EditText
                             android:id="@+id/endDate"
-                            android:layout_width="171dp"
+                            android:layout_width="158dp"
                             android:layout_height="52dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"

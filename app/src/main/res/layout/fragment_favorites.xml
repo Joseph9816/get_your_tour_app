@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FavoritesFragment">
+    tools:context=".ui.favorites.FavoritesFragment">
 
     <TextView
         android:id="@+id/text_favorites"
@@ -19,5 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:text="@string/favorites_text"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,12 +25,12 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                /*R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,*/
-                R.id.navigation_explore,
-                R.id.navigation_favorites,
-                R.id.navigation_reservations
-            )
+                setOf(
+                        /*R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,*/
+                        R.id.navigation_explore,
+                        R.id.navigation_favorites,
+                        R.id.navigation_reservations
+                )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -51,21 +51,30 @@ class MainActivity : AppCompatActivity() {
             datePicker.show(supportFragmentManager, "datePicker")
         }
         else{
-            simpleAlert("Aceptar", "Seleccione primero la fecha de ida", "Error de fechas")
+            simpleAlert("Accept", "Select the start date first", "Date error")
         }
     }
 
     private fun onDateSelectedStart(day: Int, month: Int, year: Int, date: EditText) {
         date.setText(" $day/$month/$year")
+        val endDate: EditText = findViewById(R.id.endDate)
+        val text = endDate.text
+        if(verifyEnd("$day/$month/$year", text.toString()) || text.equals("")) {
+            date.setText("$day/$month/$year")
+        } else {
+            simpleAlert("Accept", "The end date cannot be before the start date", "Date error")
+            date.setText("")
+        }
     }
 
     private fun onDateSelectedEnd(day: Int, month: Int, year: Int, date: EditText) {
         val startDate: EditText = findViewById(R.id.startDate)
         val text = startDate.text
-        if(veriifyEnd(text.toString(), "$day/$month/$year")) {
+        if(verifyEnd(text.toString(), "$day/$month/$year")) {
             date.setText("$day/$month/$year")
         } else {
-            simpleAlert("Aceptar", "La fecha de vuelta no puede ser antes que la fecha de ida", "Error de fechas")
+            simpleAlert("Accept", "The end date cannot be before the start date", "Date error")
+            date.setText("")
         }
     }
 
@@ -79,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun veriifyEnd(startDate: String, endDate: String): Boolean {
+    private fun verifyEnd(startDate: String, endDate: String): Boolean {
         val sdf = SimpleDateFormat("dd/MM/yyyy")
         var timeInMillisecondsStart = System.currentTimeMillis() - 1000
         var timeInMillisecondsEnd = System.currentTimeMillis() - 1000

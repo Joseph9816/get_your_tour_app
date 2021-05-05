@@ -6,18 +6,6 @@
     app:startDestination="@+id/navigation_explore">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.get_your_tour_app.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.get_your_tour_app.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
         android:id="@+id/navigation_explore"
         android:name="com.example.get_your_tour_app.ui.explore.ExploreFragment"
         android:label="@string/title_explore"
@@ -44,9 +32,15 @@
             android:id="@+id/action_navigation_profile_to_navigation_register"
             app:destination="@id/navigation_register" />
     </fragment>
+
     <fragment
         android:id="@+id/navigation_register"
         android:label="@string/title_register"
         android:name="com.example.get_your_tour_app.ui.register.RegisterFragment"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_navigation_register_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
+
 </navigation>

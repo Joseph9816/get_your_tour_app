@@ -3,8 +3,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
-    layout_height="wrap_content"
-    layout_width="wrap_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
@@ -39,25 +37,7 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="135dp"
-            android:layout_marginLeft="135dp"
-            android:layout_marginTop="198dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="36dp"
-            android:text="@string/from_card" />
-
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="82dp"
+            android:layout_width="40dp"
             android:layout_height="19dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
@@ -65,12 +45,33 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="119dp"
-            android:layout_marginLeft="119dp"
-            android:layout_marginTop="225dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="9dp"/>
+            android:layout_marginStart="160dp"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="202dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/from_card" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="84dp"
+            android:layout_height="18dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="114dp"
+            android:layout_marginLeft="114dp"
+            android:layout_marginTop="231dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="end"
+            android:textAlignment="textEnd"
+            android:text="@string/dollar_icon"/>
 
         <TextView
             android:id="@+id/comments"
@@ -82,12 +83,13 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginTop="226dp"
-            android:layout_marginEnd="95dp"
-            android:layout_marginRight="95dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="231dp"
+            android:layout_marginEnd="99dp"
+            android:layout_marginRight="99dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/opinions_amoung"/>
 
         <TextView
             android:id="@+id/name"
@@ -106,5 +108,36 @@
             android:layout_marginRight="9dp"
             android:layout_marginBottom="58dp"
             android:textStyle="bold" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="181dp"
+            android:layout_height="31dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="198dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginBottom="24dp"
+            android:max="5"
+            android:rating="2.5"
+            android:scaleX=".7"
+            android:scaleY=".7"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.068"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.905" />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

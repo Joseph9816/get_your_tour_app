@@ -4,28 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.get_your_tour_app.R
+import com.example.get_your_tour_app.databinding.FragmentReservationsBinding
 
 class ReservationsFragment : Fragment() {
 
-    private lateinit var reservationsViewModel: ReservationsViewModel
+    private var _binding: FragmentReservationsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        reservationsViewModel =
-            ViewModelProvider(this).get(ReservationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_reservations, container, false)
-        val textView: TextView = root.findViewById(R.id.text_reservations)
-        reservationsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+
+        _binding = FragmentReservationsBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 }
