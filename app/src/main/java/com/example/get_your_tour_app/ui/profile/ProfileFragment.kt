@@ -23,6 +23,8 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private var email = true
+    private var pass = true
 
 
     override fun onCreateView(
@@ -46,16 +48,18 @@ class ProfileFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (android.util.Patterns.EMAIL_ADDRESS.matcher(binding.EmailAddress.text.toString()).matches()){
-                    binding.button.isEnabled = true
+                    //binding.button.isEnabled = true
+                    email = false
                 }else{
-                    binding.button.isEnabled = false
+                    //binding.button.isEnabled = false
+                        email = true
                     binding.EmailAddress.setError("Invalid Email")
                 }
 
             }
 
             override fun afterTextChanged(s: Editable?) {
-
+                Log.i(TAG, "afterTextChanged")
                 /*if(binding.EmailAddress.length()>0){
                     binding.button.isEnabled = true
                 }
@@ -66,6 +70,35 @@ class ProfileFragment : Fragment() {
             }
 
         })
+        binding.Password.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                Log.i(TAG, "beforeTextChanged")
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(binding.Password.length() >= 8){
+                    pass = false
+                    binding.button.isEnabled = true
+                }
+                if(binding.Password.length() < 8 ){
+                    pass = true
+                    binding.button.isEnabled = false
+                    binding.Password.setError("length of password is to short")
+                }
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                Log.i(TAG, "beforeTextChanged")
+
+            }
+
+        })
+        fun validateButton(){
+            binding.button.isEnabled = !email && !pass
+        }
+
 
     }
 
