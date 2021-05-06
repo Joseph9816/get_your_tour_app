@@ -18,13 +18,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-                <!--<ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    tools:src="@tools:sample/backgrounds/scenic" />-->
-
                 <TextView
                     android:id="@+id/text_explore"
                     android:layout_width="match_parent"
