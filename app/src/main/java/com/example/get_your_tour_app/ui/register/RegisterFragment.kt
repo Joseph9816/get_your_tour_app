@@ -1,5 +1,7 @@
 package com.example.get_your_tour_app.ui.register
 
+import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.text.AutoText
 import android.text.Editable
@@ -19,6 +21,7 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
     private var emailStatus = false
     private var pass1 = false
+    private var passMatch = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +44,7 @@ class RegisterFragment : Fragment() {
                     emailStatus = true
 
                 }else{
-
+                    emailStatus = false
                     binding.EmailAddress.setError("Invalid Email")
                 }
             }
@@ -70,6 +73,33 @@ class RegisterFragment : Fragment() {
             }
 
         })
+        binding.editTextTextPassword2.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(binding.editTextTextPassword.text.toString().equals(binding.editTextTextPassword2.text.toString())){
+                    passMatch = true
+                }else{
+                    passMatch = false
+                    binding.editTextTextPassword2.setError("No password matched")
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
+        binding.button2.setOnClickListener {
+
+            if (binding.editTextTextPersonName.length() > 0 && binding.editTextTextPersonName2.length() > 0 && pass1 && emailStatus && passMatch) {
+                binding.button2.setText("User Registered")
+            } else {
+                binding.button2.setText("some inputs are empty")
+            }
+        }
     }
     private fun passValidate(text: String?): Boolean{
         var p = Pattern.compile("^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}\$")
