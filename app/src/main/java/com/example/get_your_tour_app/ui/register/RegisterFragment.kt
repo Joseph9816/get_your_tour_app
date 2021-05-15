@@ -1,6 +1,8 @@
 package com.example.get_your_tour_app.ui.register
 
 import android.app.AlertDialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.AutoText
@@ -12,6 +14,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.get_your_tour_app.databinding.FragmentRegisterBinding
+import com.example.get_your_tour_app.services.apiQueries
+import com.example.get_your_tour_app.services.dto.UserDto
+import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.regex.Pattern
 
 private const val TAG = "noOverride"
@@ -22,6 +32,8 @@ class RegisterFragment : Fragment() {
     private var emailStatus = false
     private var pass1 = false
     private var passMatch = false
+    private var sharedPreferences: SharedPreferences? = null
+    //private var BASE_URL = "http://7d2b90331d83.ngrok.io/GetYourTour_API/public/api/getyourtour"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -92,15 +104,49 @@ class RegisterFragment : Fragment() {
             }
 
         })
-        binding.button2.setOnClickListener {
+    }
+
+//donde el fagmento ya esta visible y se puede usar
+    override fun onStart() {
+        super.onStart()
+        Log.i("Register", "Entro al onstart")
+        binding.bRegister.setOnClickListener {
 
             if (binding.editTextTextPersonName.length() > 0 && binding.editTextTextPersonName2.length() > 0 && pass1 && emailStatus && passMatch) {
-                binding.button2.setText("User Registered")
+                binding.bRegister.setText("User Registered")
             } else {
-                binding.button2.setText("some inputs are empty")
+                binding.bRegister.setText("some inputs are empty")
             }
         }
+
+        sharedPreferences = activity?.getSharedPreferences("GETYOURTOURPREFERENCES", Context.MODE_PRIVATE)
+
+        var editor = sharedPreferences?.edit()
+        editor?.putString("user_name", "Joseph")
+        editor?.putString("user_lastname", "Joseph")
+        editor?.putString("user_id", "Joseph")
+        editor?.putString("user_email", "Joseph")
+        editor?.putString("user_logged", "true")
+        editor?.commit()
+
+        /*val service = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(apiQueries::class.java)
+
+        service.storeUser().enqueue(object : Callback<List<UserDto>> {
+            override fun onFailure(call: Call<List<UserDto>>, t: Throwable) {
+                Log.d("TAG_", "An error in api query")
+            }
+
+            override fun onResponse(call: Call<List<UserDto>>, response: Response<List<UserDto>>) {
+                Log.d("TAG_", response.body().toString())
+            }
+
+        })*/
     }
+
     private fun passValidate(text: String?): Boolean{
         var p = Pattern.compile("^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}\$")
         var m = p.matcher(text)
