@@ -50,9 +50,11 @@ class ProfileFragment : Fragment() {
                 if (android.util.Patterns.EMAIL_ADDRESS.matcher(binding.EmailAddress.text.toString()).matches()){
                     //binding.button.isEnabled = true
                     email = false
+                    validateButton()
                 }else{
                     //binding.button.isEnabled = false
-                        email = true
+                    email = true
+                    validateButton()
                     binding.EmailAddress.setError("Invalid Email")
                 }
 
@@ -79,11 +81,13 @@ class ProfileFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if(binding.Password.length() >= 8){
                     pass = false
-                    binding.button.isEnabled = true
+                    validateButton()
+                    //binding.button.isEnabled = true
                 }
                 if(binding.Password.length() < 8 ){
                     pass = true
-                    binding.button.isEnabled = false
+                    //binding.button.isEnabled = false
+                    validateButton()
                     binding.Password.setError("length of password is to short")
                 }
 
@@ -95,13 +99,13 @@ class ProfileFragment : Fragment() {
             }
 
         })
-        fun validateButton(){
-            binding.button.isEnabled = !email && !pass
-        }
 
 
     }
 
+    fun validateButton(){
+        binding.button.isEnabled = !email && !pass
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

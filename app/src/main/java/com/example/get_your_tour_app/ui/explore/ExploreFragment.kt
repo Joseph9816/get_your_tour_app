@@ -31,7 +31,7 @@ class  ExploreFragment : Fragment() {
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecycleAdapter.ViewHolder>? = null
     private var sharedPreferences: SharedPreferences? = null
-    private var BASE_URL = "http://7d2b90331d83.ngrok.io/GetYourTour_API/public/api/getyourtour/"
+    private var BASE_URL = "http://ee84eb1b052a.ngrok.io/api/getyourtour/"
 
 
     override fun onCreateView(

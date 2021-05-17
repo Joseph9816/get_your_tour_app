@@ -6,25 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.explore.ExploreFragment">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
                 <TextView
                     android:id="@+id/text_explore"
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="@string/explore_tittle"
                     android:textAlignment="center"
@@ -33,90 +29,130 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#0F1B63">
+                    android:layout_marginTop="15dp"
+                    android:background="#0F1B63"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
 
-                        <EditText
-                            android:id="@+id/startDate"
-                            android:layout_width="172dp"
-                            android:layout_height="52dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:autofillHints=""
-                            android:background="#FFFFFF"
-                            android:clickable="false"
-                            android:drawableStart="@android:drawable/ic_menu_my_calendar"
-                            android:drawableLeft="@android:drawable/ic_menu_my_calendar"
-                            android:focusable="false"
-                            android:hint="@string/Ida"
-                            android:inputType="date"
-                            android:onClick="showDatePickerDialog1"
-                            android:textColor="#000000" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="82dp">
 
-                        <EditText
-                            android:id="@+id/endDate"
-                            android:layout_width="158dp"
-                            android:layout_height="52dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:autofillHints=""
-                            android:background="#FFFFFF"
-                            android:clickable="false"
-                            android:drawableStart="@android:drawable/ic_menu_my_calendar"
-                            android:drawableLeft="@android:drawable/ic_menu_my_calendar"
-                            android:focusable="false"
-                            android:hint="@string/fecha_regreso"
-                            android:inputType="date"
-                            android:onClick="showDatePickerDialog2"
-                            android:textColor="#000000" />
+                                <EditText
+                                    android:id="@+id/startDate"
+                                    android:layout_width="155dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:background="#FFFFFF"
+                                    android:drawableStart="@drawable/ic_calendar"
+                                    android:drawableLeft="@drawable/ic_calendar"
+                                    android:focusable="false"
+                                    android:hint="@string/Ida"
+                                    android:onClick="showDatePickerDialog1"
+                                    android:padding="15dp"
+                                    android:paddingLeft="15dp"
+                                    android:paddingTop="15dp"
+                                    android:paddingRight="15dp"
+                                    android:paddingBottom="15dp"
+                                    android:textColor="#000000"
+                                    android:autofillHints="" />
+
+                                <EditText
+                                    android:id="@+id/endDate"
+                                    android:layout_width="155dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_marginEnd="15dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:background="#FFFFFF"
+                                    android:baselineAligned="false"
+                                    android:drawableStart="@drawable/ic_calendar"
+                                    android:drawableLeft="@drawable/ic_calendar"
+                                    android:focusable="false"
+                                    android:hint="@string/fecha_regreso"
+                                    android:onClick="showDatePickerDialog2"
+                                    android:padding="15dp"
+                                    android:paddingLeft="15dp"
+                                    android:paddingTop="15dp"
+                                    android:paddingRight="15dp"
+                                    android:paddingBottom="15dp"
+                                    android:textColor="#000000"
+                                    android:autofillHints="" />
+                        </RelativeLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="85dp"
+                    android:layout_marginTop="5dp"
                     android:background="#0F1B63"
+                    android:baselineAligned="false"
                     android:orientation="horizontal">
 
-                        <EditText
-                            android:id="@+id/place"
-                            android:layout_width="191dp"
-                            android:layout_height="53dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:autofillHints=""
-                            android:background="#FFFFFF"
-                            android:hint="@string/destiny"
-                            android:inputType="text" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="82dp">
 
-                        <Button
-                            android:id="@+id/button"
-                            style="@style/Widget.AppCompat.Button"
-                            android:layout_width="0dp"
-                            android:layout_height="52dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_weight="5"
-                            android:background="#39489C"
-                            android:text="@string/search"
-                            app:icon="@android:drawable/ic_menu_search" />
+                                <EditText
+                                    android:id="@+id/place"
+                                    android:layout_width="155dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:background="#FFFFFF"
+                                    android:hint="@string/destiny"
+                                    android:inputType="text"
+                                    android:textColor="#000000"
+                                    android:autofillHints="" />
+
+                                <Button
+                                    android:id="@+id/button"
+                                    style="@style/Widget.AppCompat.Button"
+                                    android:layout_width="155dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_marginEnd="15dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_marginBottom="15dp"
+                                    app:backgroundTint="#39489C"
+                                    android:background="@drawable/selector_btn_enabled_property"
+                                    android:drawableStart="@mipmap/ic_search"
+                                    android:drawableLeft="@mipmap/ic_search"
+                                    android:text="@string/search" />
+                        </RelativeLayout>
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycleView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal"/>
-
         </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
