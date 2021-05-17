@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.get_your_tour_app.R
@@ -52,7 +53,7 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -62,7 +63,6 @@ class RegisterFragment : Fragment() {
         validateButton()
         binding.EmailAddress.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                Log.i(TAG, "beforeTextChanged")
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (android.util.Patterns.EMAIL_ADDRESS.matcher(binding.EmailAddress.text.toString()).matches()){
@@ -77,7 +77,6 @@ class RegisterFragment : Fragment() {
                 }
             }
             override fun afterTextChanged(s: Editable?) {
-                Log.i(TAG, "beforeTextChanged")
             }
         })
 
@@ -169,6 +168,7 @@ class RegisterFragment : Fragment() {
 
         //se crea el servico para consumir la api
         binding.bRegister.setOnClickListener{
+            Toast.makeText(activity?.applicationContext, "Registering User", Toast.LENGTH_SHORT).show()
             //se recupera el token almacenado
             sharedPreferences = activity?.getSharedPreferences("GETYOURTOURPREFERENCES", Context.MODE_PRIVATE)
             val token = sharedPreferences?.getString("api_token", "")
@@ -192,6 +192,7 @@ class RegisterFragment : Fragment() {
                         Log.d("TAG_", "Entro al callback")
                         Log.d("TAG_", response.body().toString())
                         if(response.body() != null){
+                            Toast.makeText(activity?.applicationContext, "User Registered", Toast.LENGTH_SHORT).show()
                             it.findNavController().navigate(R.id.action_navigation_register_to_navigation_profile)
                         }
                     }
