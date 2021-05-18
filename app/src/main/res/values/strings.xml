@@ -33,4 +33,13 @@
     <string name="dollar_icon">$</string>
     <string name="favorites_text">This is the section of favorites</string>
     <string name="reservations_text">This is the section of reservations</string>
+    <string name="data_user">User profile</string>
+    <string name="user_name">User name: </string>
+    <string name="val">val</string>
+    <string name="logout">log out</string>
+    <string name="login_error">User o Password incorrect</string>
+    <string name="warning">Warrning</string>
+    <string name="alert_button_name">accept</string>
+    <string name="password_format">the password should have 1 Upercase, 1 undercase, one number and one character</string>
+    <string name="email_error">Invalid Email</string>
 </resources>
