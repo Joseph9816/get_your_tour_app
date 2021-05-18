@@ -188,7 +188,7 @@ class RegisterFragment : Fragment() {
             //se verifica si el token existe
             if (token != null) {
                 service.storeUser(token, user).enqueue(object : Callback<List<UserDto>> {
-                        override fun onResponse(call: Call<List<UserDto>>, response: Response<List<UserDto>>) {
+                    override fun onResponse(call: Call<List<UserDto>>, response: Response<List<UserDto>>) {
                         Log.d("TAG_", "Entro al callback")
                         Log.d("TAG_", response.body().toString())
                         if(response.body() != null){

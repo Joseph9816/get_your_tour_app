@@ -62,17 +62,14 @@ class  ExploreFragment : Fragment() {
 
         val token = TokenDto()
         service.getToken(token).enqueue(object : Callback<List<TokenValue>> {
-            override fun onResponse(
-                call: Call<List<TokenValue>>,
-                response: Response<List<TokenValue>>
-            ) {
+            override fun onResponse(call: Call<List<TokenValue>>, response: Response<List<TokenValue>>) {
                 Log.d("TAG_", "Entro al callback")
                 Log.d("TAG_", response.body().toString())
                 response.body()?.get(0)?.let {
                     Log.d("TAG_", it.token)
                     sharedPreferences = activity?.getSharedPreferences("GETYOURTOURPREFERENCES", Context.MODE_PRIVATE)
 
-                    var editor = sharedPreferences?.edit()
+                    val editor = sharedPreferences?.edit()
                     editor?.putString("api_token", "Bearer " + it.token)
                     editor?.commit()
                 }
