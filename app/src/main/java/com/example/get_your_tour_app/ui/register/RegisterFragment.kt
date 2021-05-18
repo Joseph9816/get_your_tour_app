@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.get_your_tour_app.R
+import com.example.get_your_tour_app.Utils.Utils
 import com.example.get_your_tour_app.databinding.FragmentRegisterBinding
 import com.example.get_your_tour_app.services.Token
 import com.example.get_your_tour_app.services.User
@@ -85,14 +86,15 @@ class RegisterFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(passValidate(binding.editTextTextPassword.text.toString())){
+                val util = Utils()
+                if(util.passValidate(binding.editTextTextPassword.text.toString())){
                     pass1 = true
                     pass = false
                     validateButton()
                 }else{
                     pass1 = false
                     pass = true
-                    binding.editTextTextPassword.setError("the password should have 1 Upercase, 1 undercase, one number and one character")
+                    binding.editTextTextPassword.setError(getString(R.string.password_format))
                     validateButton()
                 }
             }
@@ -207,11 +209,7 @@ class RegisterFragment : Fragment() {
         }//finaliza el onclick listener del bRegister
     }
 
-    private fun passValidate(text: String?): Boolean{
-        val p = Pattern.compile("^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}\$")
-        val m = p.matcher(text)
-        return m.matches()
-    }
+
 
     fun validateButton(){
         binding.bRegister.isEnabled = !name && !last_name && !pass && !pass2 && !email

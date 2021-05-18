@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.get_your_tour_app.R
+import com.example.get_your_tour_app.Utils.Utils
 import com.example.get_your_tour_app.databinding.FragmentProfileBinding
 import com.example.get_your_tour_app.services.User
 import com.example.get_your_tour_app.services.dto.UserDto
@@ -81,7 +82,7 @@ class ProfileFragment : Fragment() {
                     //binding.button.isEnabled = false
                     email = true
                     validateButton()
-                    binding.EmailAddress.setError("Invalid Email")
+                    binding.EmailAddress.setError(getString(R.string.email_error))
                 }
 
             }
@@ -105,7 +106,8 @@ class ProfileFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(binding.Password.length() >= 8){
+                val util = Utils()
+                if(util.passValidate(binding.Password.text.toString())){
                     pass = false
                     validateButton()
                     //binding.button.isEnabled = true
@@ -114,7 +116,7 @@ class ProfileFragment : Fragment() {
                     pass = true
                     //binding.button.isEnabled = false
                     validateButton()
-                    binding.Password.setError("length of password is to short")
+                    binding.Password.setError(getString(R.string.password_format))
                 }
 
             }
@@ -217,7 +219,7 @@ class ProfileFragment : Fragment() {
                             editor?.commit()
 
                             //Toast.makeText(activity?.applicationContext, R.string.login_error, Toast.LENGTH_SHORT).show()
-                            alert("Acept", "Users doesn't", "Error")
+                            alert(getString(R.string.alert_button_name), getString(R.string.login_error), getString(R.string.warning))
 
                         }
                     }
