@@ -40,7 +40,7 @@ class ProfileFragment : Fragment() {
     private var email = true
     private var pass = true
     private var sharedPreferences: SharedPreferences? = null
-    private var BASE_URL = "http://aa6a0059b9d9.ngrok.io/api/getyourtour/"
+    private var BASE_URL = "http://9aec1ae89e41.ngrok.io/api/getyourtour/"
 
 
     override fun onCreateView(
