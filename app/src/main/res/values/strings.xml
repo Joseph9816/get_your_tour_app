@@ -38,7 +38,8 @@
     <string name="val">val</string>
     <string name="logout">log out</string>
     <string name="login_error">User o Password incorrect</string>
-    <string name="warning">Warrning</string>
+    <string name="api_error">A problem occurred</string>
+    <string name="warning">Warning</string>
     <string name="alert_button_name">accept</string>
     <string name="password_format">the password should have 1 Upercase, 1 undercase, one number and one character</string>
     <string name="email_error">Invalid Email</string>

@@ -9,14 +9,14 @@ import com.example.get_your_tour_app.services.dto.TourDto
 import com.example.get_your_tour_app.services.dto.TourInformationDto
 
 class ExploreViewModel : ViewModel(){
-    private var tours = MutableLiveData<List<TourInformationDto>>()
-    private var tourRepository = TourRepository()
     private var token = MutableLiveData<List<TokenValue>>()
     private var tokenRepository = TokenRepository()
+    private var tours = MutableLiveData<List<TourInformationDto>>()
+    private var tourRepository = TourRepository()
 
     init {
-        tours = tourRepository.tours
         token = tokenRepository.token
+        tours = tourRepository.tours
     }
 
     fun getToursList() {

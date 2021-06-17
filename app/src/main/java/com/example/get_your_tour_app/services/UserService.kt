@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
-interface User {
+interface UserService {
     @POST("users")
     fun storeUser(@Header("Authorization") authorization: String, @Body user: UserRegister): Call<List<UserDto>>
 

@@ -10,18 +10,17 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.get_your_tour_app.R
+import com.example.get_your_tour_app.RecycleAdapter
 import com.example.get_your_tour_app.Utils.Utils
 import com.example.get_your_tour_app.databinding.FragmentProfileBinding
-import com.example.get_your_tour_app.services.User
+import com.example.get_your_tour_app.services.UserService
 import com.example.get_your_tour_app.services.dto.UserDto
 import com.example.get_your_tour_app.services.dto.UserLog
 import com.google.gson.GsonBuilder
@@ -30,7 +29,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.regex.Pattern
 
 private const val TAG = "noOverride"
 class ProfileFragment : Fragment() {
@@ -40,7 +38,7 @@ class ProfileFragment : Fragment() {
     private var email = true
     private var pass = true
     private var sharedPreferences: SharedPreferences? = null
-    private var BASE_URL = "http://9aec1ae89e41.ngrok.io/api/getyourtour/"
+    private lateinit var viewModel: ProfileViewModel
 
 
     override fun onCreateView(
@@ -49,6 +47,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         sharedPreferences = activity?.getSharedPreferences("GETYOURTOURPREFERENCES", Context.MODE_PRIVATE)
         val logged = sharedPreferences?.getString("user_logged", "false")
@@ -75,26 +74,19 @@ class ProfileFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (Patterns.EMAIL_ADDRESS.matcher(binding.EmailAddress.text.toString()).matches()){
-                    //binding.button.isEnabled = true
                     email = false
+                    viewModel.setEmail(binding.EmailAddress.text.toString())
                     validateButton()
                 }else{
-                    //binding.button.isEnabled = false
                     email = true
                     validateButton()
-                    binding.EmailAddress.setError(getString(R.string.email_error))
+                    binding.EmailAddress.error = getString(R.string.email_error)
                 }
 
             }
 
             override fun afterTextChanged(s: Editable?) {
                 Log.i(TAG, "afterTextChanged")
-                /*if(binding.EmailAddress.length()>0){
-                    binding.button.isEnabled = true
-                }
-                if(binding.EmailAddress.length() <= 0){
-                    binding.button.isEnabled = false
-                }*/
 
             }
 
@@ -109,6 +101,7 @@ class ProfileFragment : Fragment() {
                 val util = Utils()
                 if(util.passValidate(binding.Password.text.toString())){
                     pass = false
+                    viewModel.setPassword(binding.Password.text.toString())
                     validateButton()
                     //binding.button.isEnabled = true
                 }
@@ -116,7 +109,7 @@ class ProfileFragment : Fragment() {
                     pass = true
                     //binding.button.isEnabled = false
                     validateButton()
-                    binding.Password.setError(getString(R.string.password_format))
+                    binding.Password.error = getString(R.string.password_format)
                 }
 
             }
@@ -125,115 +118,56 @@ class ProfileFragment : Fragment() {
                 Log.i(TAG, "beforeTextChanged")
 
             }
-
         })
-
-
     }
+
     override fun onStart(){
         super.onStart()
-
         binding.button.setOnClickListener(){
-            sharedPreferences = activity?.getSharedPreferences("GETYOURTOURPREFERENCES", Context.MODE_PRIVATE)
-            val token = sharedPreferences?.getString("api_token", "")
-            val gson = GsonBuilder()
-                .setLenient()
-                .create()
-            val service = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()
-                .create(User::class.java)
-            val log = UserLog(binding.EmailAddress.text.toString(), binding.Password.text.toString())
-            if (token != null) {
-                service.login(token, log).enqueue(object : Callback<List<UserDto>>{
-                    override fun onResponse(call: Call<List<UserDto>>, response: Response<List<UserDto>>) {
-                        Log.d("TAG_", "Entro al callback")
-                        Log.d("TAG_", response.body().toString())
-                        if (response.body() != null) {
-                            Log.d("TAG_", "Entro al if")
-                            response.body()?.get(0)?.let {
-                                sharedPreferences = activity?.getSharedPreferences("GETYOURTOURPREFERENCES", Context.MODE_PRIVATE)
-                                val editor = sharedPreferences?.edit()
-                                editor?.putString("user_logged", "true")
-                                editor?.putString("user_id", it.id.toString())
-                                editor?.putString("user_name", it.name)
-                                editor?.putString("user_last_name", it.last_name)
-                                editor?.putString("user_email", it.email)
-                                editor?.commit()
+            viewModel.setEmail(binding.EmailAddress.text.toString())
+            viewModel.setPassword(binding.Password.text.toString())
+            viewModel.login()
+            viewModel.getUser().observe(viewLifecycleOwner, Observer { user ->
 
-                            }
-                            it.findNavController().navigate(R.id.action_navigation_profile_to_navigation_explore)
-                                /*if (it.status.equals('0')) {
-                                    sharedPreferences = activity?.getSharedPreferences(
-                                        "GETYOURTOURPREFERENCES",
-                                        Context.MODE_PRIVATE
-                                    )
-
-                                    val editor = sharedPreferences?.edit()
-                                    editor?.putString("user_logged", "true")
-                                    editor?.putString("user_id", it.id.toString())
-                                    editor?.putString("user_name", it.name)
-                                    editor?.putString("user_last_name", it.last_name)
-                                    editor?.putString("user_email", it.email)
-                                    editor?.commit()
-
-                                } else if (it.status.equals('2')) {
-                                    sharedPreferences = activity?.getSharedPreferences(
-                                        "GETYOURTOURPREFERENCES",
-                                        Context.MODE_PRIVATE
-                                    )
-
-                                    val editor = sharedPreferences?.edit()
-                                    editor?.putString("user_logged", "false")
-                                    editor?.commit()
-
-                                    simpleAlert(
-                                        "Accept",
-                                        R.string.login_error.toString(),
-                                        R.string.warning.toString()
-                                    )
-                                } else {
-                                    sharedPreferences = activity?.getSharedPreferences(
-                                        "GETYOURTOURPREFERENCES",
-                                        Context.MODE_PRIVATE
-                                    )
-
-                                    val editor = sharedPreferences?.edit()
-                                    editor?.putString("user_logged", "false")
-                                    editor?.commit()
-
-                                    simpleAlert(
-                                        "Accept",
-                                        R.string.login_error.toString(),
-                                        R.string.warning.toString()
-                                    )
-                                }
-                            }*/
-                        }else{
-
-                            sharedPreferences = activity?.getSharedPreferences("GETYOURTOURPREFERENCES", Context.MODE_PRIVATE)
-
+                val length = user.count()
+                if(length > 0) {
+                    Log.d("TAG_", user.toString())
+                    user[0].let {
+                        if (it.status == "1") {
+                            val editor = sharedPreferences?.edit()
+                            editor?.putString("user_logged", "true")
+                            editor?.putString("user_id", it.id.toString())
+                            editor?.putString("user_name", it.name)
+                            editor?.putString("user_last_name", it.last_name)
+                            editor?.putString("user_email", it.email)
+                            editor?.apply()
+                        } else if (it.status == "2") {
                             val editor = sharedPreferences?.edit()
                             editor?.putString("user_logged", "false")
-                            editor?.commit()
-
-                            //Toast.makeText(activity?.applicationContext, R.string.login_error, Toast.LENGTH_SHORT).show()
-                            alert(getString(R.string.alert_button_name), getString(R.string.login_error), getString(R.string.warning))
-
+                            editor?.apply()
+                            alert(
+                                getString(R.string.alert_button_name),
+                                getString(R.string.login_error),
+                                getString(R.string.warning)
+                            )
+                        } else {
+                            val editor = sharedPreferences?.edit()
+                            editor?.putString("user_logged", "false")
+                            editor?.apply()
+                            alert(
+                                getString(R.string.alert_button_name),
+                                getString(R.string.api_error),
+                                getString(R.string.warning)
+                            )
                         }
                     }
-
-                    override fun onFailure(call: Call<List<UserDto>>, t: Throwable) {
-                        Log.d("TAG_", "An error in api query")
-                        Log.d("TAG_", t.message.toString())
+                    if (user[0].status == "1") {
+                        it.findNavController().navigate(R.id.action_navigation_profile_to_navigation_explore)
                     }
-
-                })
-
-
-            }
+                }
+            })
         }
+
         binding.logOut.setOnClickListener(){
             sharedPreferences = activity?.getSharedPreferences("GETYOURTOURPREFERENCES", Context.MODE_PRIVATE)
             val editor = sharedPreferences?.edit()
@@ -242,7 +176,7 @@ class ProfileFragment : Fragment() {
             editor?.putString("user_name", "")
             editor?.putString("user_last_name", "")
             editor?.putString("user_email", "")
-            editor?.commit()
+            editor?.apply()
             binding.constraintProfile.visibility = View.GONE
             binding.constraintLogIn.visibility = View.VISIBLE
         }
@@ -250,10 +184,10 @@ class ProfileFragment : Fragment() {
 
     }
 
-
     fun validateButton(){
         binding.button.isEnabled = !email && !pass
     }
+
     private fun alert(text: String, message: String, title: String){
         val alertDialog: AlertDialog? = activity?.let {val builder = AlertDialog.Builder(it)
             builder.apply {
@@ -267,6 +201,7 @@ class ProfileFragment : Fragment() {
             alertDialog.show()
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
