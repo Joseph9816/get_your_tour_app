@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.get_your_tour_app.Constants
 import com.example.get_your_tour_app.GetTokenFragment
+import com.example.get_your_tour_app.parcelables.SearchParcelable
+import com.example.get_your_tour_app.services.dto.SearchDto
 import com.example.get_your_tour_app.services.Token
 import com.example.get_your_tour_app.services.TourService
 import com.example.get_your_tour_app.services.dto.TourDto
@@ -45,6 +47,30 @@ class TourRepository {
                 response.body()?.get(0)?.let {
                     Log.d("TAG_", it.toString())
                 }
+            }
+
+            override fun onFailure(call: Call<List<TourInformationDto>>, t: Throwable) {
+                Log.d("TAG_", "An error getToursInformation")
+                Log.d("TAG_", t.message.toString())
+
+            }
+
+        })
+    }
+
+    fun getSpecifiedTours(search: SearchParcelable) {
+        Log.d("TAG_", "Entro al metodo getTours ")
+        val dto = SearchDto(search.start_date, search.end_date, search.place)
+        getRetrofit().getSpecifiedTours(Constants.Token, Constants.UserId, dto).enqueue(object : Callback<List<TourInformationDto>> {
+            override fun onResponse(call: Call<List<TourInformationDto>>, response: Response<List<TourInformationDto>>) {
+                Log.d("TAG_", "Entro al response")
+                tours.value = response.body().orEmpty()
+                Log.d("TAG_DATA", response.body().toString())
+                //if(response.body()?.count() > 0) {
+                    /*response.body()?.get(0)?.let {
+                        Log.d("TAG_", it.toString())
+                    }*/
+                //}
             }
 
             override fun onFailure(call: Call<List<TourInformationDto>>, t: Throwable) {

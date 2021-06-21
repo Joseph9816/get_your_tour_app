@@ -8,4 +8,7 @@ interface TourService {
     @GET("tours/information/{user}")
     fun getTours(@Header("Authorization") authorization: String, @Path("user") user: Int): Call<List<TourInformationDto>>
 
+    @POST("tours/information/{user}")
+    fun getSpecifiedTours(@Header("Authorization") authorization: String, @Path("user") user: Int, @Body search: SearchDto): Call<List<TourInformationDto>>
+
 }

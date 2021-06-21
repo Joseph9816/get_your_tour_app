@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.get_your_tour_app.Constants
 import com.example.get_your_tour_app.R
 import com.example.get_your_tour_app.RecycleAdapter
 import com.example.get_your_tour_app.Utils.Utils
@@ -47,7 +48,6 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         sharedPreferences = activity?.getSharedPreferences("GETYOURTOURPREFERENCES", Context.MODE_PRIVATE)
         val logged = sharedPreferences?.getString("user_logged", "false")
@@ -60,6 +60,11 @@ class ProfileFragment : Fragment() {
             binding.constraintLogIn.visibility = View.VISIBLE
         }
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -179,6 +184,7 @@ class ProfileFragment : Fragment() {
             editor?.apply()
             binding.constraintProfile.visibility = View.GONE
             binding.constraintLogIn.visibility = View.VISIBLE
+            Constants.UserId = -1
         }
 
 

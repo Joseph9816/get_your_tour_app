@@ -67,11 +67,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onDateSelectedStart(day: Int, month: Int, year: Int, date: EditText) {
-        date.setText(" $day/$month/$year")
+        date.setText("$year-$month-$day")
         val endDate: EditText = findViewById(R.id.endDate)
         val text = endDate.text
         if(verifyEnd("$day/$month/$year", text.toString()) || text.equals("")) {
-            date.setText("$day/$month/$year")
+            val month2 = month + 1
+            date.setText("$year-$month2-$day")
         } else {
             simpleAlert("Accept", "The end date cannot be before the start date", "Date error")
             date.setText("")
@@ -82,7 +83,8 @@ class MainActivity : AppCompatActivity() {
         val startDate: EditText = findViewById(R.id.startDate)
         val text = startDate.text
         if(verifyEnd(text.toString(), "$day/$month/$year")) {
-            date.setText("$day/$month/$year")
+            val month2 = month + 1
+            date.setText("$year-$month2-$day")
         } else {
             simpleAlert("Accept", "The end date cannot be before the start date", "Date error")
             date.setText("")

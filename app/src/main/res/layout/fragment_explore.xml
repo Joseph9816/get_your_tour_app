@@ -50,6 +50,7 @@
                                     android:layout_marginLeft="15dp"
                                     android:layout_marginTop="15dp"
                                     android:layout_marginBottom="15dp"
+                                    android:autofillHints=""
                                     android:background="#FFFFFF"
                                     android:drawableStart="@drawable/ic_calendar"
                                     android:drawableLeft="@drawable/ic_calendar"
@@ -61,8 +62,7 @@
                                     android:paddingTop="15dp"
                                     android:paddingRight="15dp"
                                     android:paddingBottom="15dp"
-                                    android:textColor="#000000"
-                                    android:autofillHints="" />
+                                    android:textColor="#000000" />
 
                                 <EditText
                                     android:id="@+id/endDate"
@@ -76,6 +76,7 @@
                                     android:layout_marginEnd="15dp"
                                     android:layout_marginRight="15dp"
                                     android:layout_marginBottom="15dp"
+                                    android:autofillHints=""
                                     android:background="#FFFFFF"
                                     android:baselineAligned="false"
                                     android:drawableStart="@drawable/ic_calendar"
@@ -88,8 +89,7 @@
                                     android:paddingTop="15dp"
                                     android:paddingRight="15dp"
                                     android:paddingBottom="15dp"
-                                    android:textColor="#000000"
-                                    android:autofillHints="" />
+                                    android:textColor="#000000" />
                         </RelativeLayout>
 
                 </LinearLayout>
@@ -118,14 +118,14 @@
                                     android:layout_marginLeft="15dp"
                                     android:layout_marginTop="15dp"
                                     android:layout_marginBottom="15dp"
+                                    android:autofillHints=""
                                     android:background="#FFFFFF"
                                     android:hint="@string/destiny"
                                     android:inputType="text"
-                                    android:textColor="#000000"
-                                    android:autofillHints="" />
+                                    android:textColor="#000000" />
 
                                 <Button
-                                    android:id="@+id/button"
+                                    android:id="@+id/bSearch"
                                     style="@style/Widget.AppCompat.Button"
                                     android:layout_width="155dp"
                                     android:layout_height="match_parent"
@@ -137,11 +137,11 @@
                                     android:layout_marginEnd="15dp"
                                     android:layout_marginRight="15dp"
                                     android:layout_marginBottom="15dp"
-                                    app:backgroundTint="#39489C"
                                     android:background="@drawable/selector_btn_enabled_property"
                                     android:drawableStart="@mipmap/ic_search"
                                     android:drawableLeft="@mipmap/ic_search"
-                                    android:text="@string/search" />
+                                    android:text="@string/search"
+                                    app:backgroundTint="#39489C" />
                         </RelativeLayout>
                 </LinearLayout>
 
@@ -149,7 +149,7 @@
                     android:id="@+id/recycleView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"/>
+                    android:orientation="horizontal" />
         </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

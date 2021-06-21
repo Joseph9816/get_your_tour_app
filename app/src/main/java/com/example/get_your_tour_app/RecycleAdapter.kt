@@ -14,13 +14,6 @@ import com.squareup.picasso.Picasso
 
 class RecycleAdapter(val result: List<TourInformationDto>): RecyclerView.Adapter<RecycleAdapter.ViewHolder>() {
 
-    private val names = arrayOf("Amsterdam: The best travel of your life", "Paris: The wonders of Paris", "Póas Volcano: Mountain wonder")
-    private val images = intArrayOf(R.drawable.amsterdam, R.drawable.eiffel_tower, R.drawable.poas_volcano)
-    private val prices = floatArrayOf(100F, 80F, 50F)
-    private val ratings = floatArrayOf(4.5F, 3F, 5F)
-    private val comments = intArrayOf(10, 2, 20)
-    private val likes = booleanArrayOf(true, false, false)
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var itemImage: ImageView = itemView.findViewById(R.id.imageView)
         var itemName: TextView = itemView.findViewById(R.id.name)
@@ -29,7 +22,7 @@ class RecycleAdapter(val result: List<TourInformationDto>): RecyclerView.Adapter
         var price: TextView = itemView.findViewById(R.id.price)
         var favType: Int = 0
         var rating: RatingBar = itemView.findViewById(R.id.ratingBar)
-        var tour_id: Int = 0
+        var tourId: Int = 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleAdapter.ViewHolder {
@@ -40,15 +33,19 @@ class RecycleAdapter(val result: List<TourInformationDto>): RecyclerView.Adapter
     override fun onBindViewHolder(holder: RecycleAdapter.ViewHolder, position: Int) {
         val tour = result?.get(position)
         holder.itemName.text = tour.name
-        holder.tour_id = tour.id
+        holder.tourId = tour.id
         Picasso.get().load(tour.image).into(holder.itemImage)
         val text = holder.price.text
         holder.price.text = "$text${tour.price}"
         holder.rating.rating = tour.rating
         holder.opinions.text = "${tour.comments} opinions"
-        holder.favType = tour.like
-        changeLikeIcon(holder)
-        holder.itemFavoriteButton.setOnClickListener { changeLikeIcon(holder) }
+        if(Constants.UserId != -1) {
+            holder.favType = tour.like
+            changeLikeIcon(holder)
+            holder.itemFavoriteButton.setOnClickListener { changeLikeIcon(holder) }
+        } else {
+            holder.itemFavoriteButton.visibility = View.GONE
+        }
     }
 
     private fun changeLikeIcon(holder: RecycleAdapter.ViewHolder){

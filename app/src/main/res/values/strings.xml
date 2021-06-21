@@ -43,4 +43,5 @@
     <string name="alert_button_name">accept</string>
     <string name="password_format">the password should have 1 Upercase, 1 undercase, one number and one character</string>
     <string name="email_error">Invalid Email</string>
+    <string name="no_tours_available">No tours available</string>
 </resources>

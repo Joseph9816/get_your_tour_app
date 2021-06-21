@@ -1,5 +1,6 @@
 package com.example.get_your_tour_app.Utils
 
+import android.app.AlertDialog
 import java.util.regex.Pattern
 
 class Utils {
